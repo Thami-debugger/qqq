@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <p>Current Number Being Served: {{ current_number }}</p>
+    <h2>Queue</h2>
+    <ul>
+        {% for number in queue %}
+        <li>{{ number }} <form action="{{ url_for('mark_missing', number=number) }}" method="POST" style="display:inline;"><button type="submit">Mark as Missing</button></form></li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('serve_next') }}" method="POST">
+        <button type="submit">Serve Next</button>
+    </form>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
